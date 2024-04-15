@@ -1,0 +1,60 @@
+{{#if isEmail}}
+<div class="form__item">
+	<div class="field">
+		<label for="{{name}}" class="field__label">{{label}}</label>
+		<input oninput="{{action}}(this.name, this.value)" type="email" name="{{name}}" placeholder="{{placeholder}}"
+			class="field__input">
+	</div>
+	<span name="{{name}}" class="form__error">ERROR</span>
+</div>
+{{/if}}
+{{#if isPassword}}
+<div class="form__item">
+	<div class="field">
+		<label for="{{name}}" class="field__label">{{label}}</label>
+		<div class="field__wrapper">
+			<input oninput="{{action}}(this.name, this.value)" type="password" name="{{name}}" placeholder="{{placeholder}}"
+				class="field__input" value="{{value}}">
+			<span onclick="fieldPassword.toggle(this)" class="field__icon"></span>
+		</div>
+	</div>
+	<span name="{{name}}" class="form__error">ERROR</span>
+</div>
+{{/if}}
+{{#if isCheckbox}}
+<div class="form__item">
+	<div class="field field--checkbox">
+		<button class="field__wrapper" onclick="fieldCheckbox.toggle(this);
+		{{action}}('{{name}}', this.hasAttribute('active'));" type="button">
+			<span class="field__icon"></span>
+			<span class="field__label field__label--checkbox">{{label}}</span>
+		</button>
+	</div>
+	<span name="{{name}}" class="form__error">ERROR</span>
+</div>
+{{/if}}
+{{#if isSelect}}
+<div class="form__item">
+	<div class="field">
+		<span class="field__label">{{label}}</span>
+
+		<div class="field__container">
+			<button onclick="fieldSelect.toggle(this);" class="field__select" type="button">
+				<span class="field__icon"></span>
+				<span class="field__value field__value--placeholder">{{placeholder}}</span>
+			</button>
+			<ul class="field__option-list">
+				{{#each list}}
+				<li onclick="
+				fieldSelect.change(this);
+				{{../action}}('{{../name}}', {{value}});
+				" class="field__option">
+					{{text}}
+				</li>
+				{{/each}}
+			</ul>
+		</div>
+	</div>
+	<span name="{{name}}" class="form__error">ERROR</span>
+</div>
+{{/if}}
