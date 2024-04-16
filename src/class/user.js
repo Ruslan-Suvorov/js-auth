@@ -1,6 +1,6 @@
 class User {
   constructor({ email, password, role }) {
-    this.email = email
+    this.email = String(email).toLowerCase()
     this.password = password
     this.role = User.#convertRole(role)
   }
@@ -35,8 +35,14 @@ class User {
     console.log(this.#list)
   }
 
-  static getByEmail = (email) =>
-    this.#list.find((user) => user.email === email) || null
+  static getByEmail = (email) => {
+    return (
+      this.#list.find(
+        (user) =>
+          user.email === String(email).toLowerCase(),
+      ) || null
+    )
+  }
 }
 
 module.exports = { User }

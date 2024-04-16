@@ -4,23 +4,14 @@ import {
   REGEXP_PASSWORD,
 } from '../../script/form'
 
-class SignupForm extends Form {
+class RecoveryForm extends Form {
   FIELD_NAME = {
     EMAIL: 'email',
-    PASSWORD: 'password',
-    PADDWORD_AGAIN: 'passwordAgain',
-    ROLE: 'role',
-    IS_CONFIRM: 'isConfirm',
   }
   FIELD_ERROR = {
     IS_EMPTY: 'Поле має бути заповнене!',
     IS_BIG: 'Дуже довге значення!',
     EMAIL: 'Введіть коректну e-mail адресу!',
-    PASSWORD:
-      'Мінімум 8 символів, включаючи мінімум 1 цифру! Лише латиниця!',
-    PADDWORD_AGAIN: 'Повторний пароль не збігається!',
-    NOT_CONFIRM: 'Ви не погодились з правилами!',
-    ROLE: 'Потрібно обрати роль',
   }
 
   validate = (name, value) => {
@@ -70,7 +61,7 @@ class SignupForm extends Form {
       this.setAlert('progress', 'Завантаження...')
 
       try {
-        const res = await fetch('/signup', {
+        const res = await fetch('/recovery', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -82,6 +73,8 @@ class SignupForm extends Form {
 
         if (res.ok) {
           this.setAlert('success', data.message)
+
+          location.assign('/recovery-confirm')
         } else {
           this.setAlert('error', data.message)
         }
@@ -95,12 +88,8 @@ class SignupForm extends Form {
     return JSON.stringify({
       [this.FIELD_NAME.EMAIL]:
         this.value[this.FIELD_NAME.EMAIL],
-      [this.FIELD_NAME.PASSWORD]:
-        this.value[this.FIELD_NAME.PASSWORD],
-      [this.FIELD_NAME.ROLE]:
-        this.value[this.FIELD_NAME.ROLE],
     })
   }
 }
 
-window.signupForm = new SignupForm()
+window.recoveryForm = new RecoveryForm()
