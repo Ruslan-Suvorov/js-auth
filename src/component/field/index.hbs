@@ -8,6 +8,7 @@
 	<span name="{{name}}" class="form__error">ERROR</span>
 </div>
 {{/if}}
+
 {{#if isPassword}}
 <div class="form__item">
 	<div class="field">
@@ -21,11 +22,12 @@
 	<span name="{{name}}" class="form__error">ERROR</span>
 </div>
 {{/if}}
+
 {{#if isCheckbox}}
 <div class="form__item">
 	<div class="field field--checkbox">
 		<button class="field__wrapper" onclick="fieldCheckbox.toggle(this);
-		{{action}}('{{name}}', this.hasAttribute('active'));" type="button">
+		{{action}}('{{name}}', this.hasAttribute('active'));" type="button" name="{{name}}">
 			<span class="field__icon"></span>
 			<span class="field__label field__label--checkbox">{{label}}</span>
 		</button>
@@ -33,13 +35,14 @@
 	<span name="{{name}}" class="form__error">ERROR</span>
 </div>
 {{/if}}
+
 {{#if isSelect}}
 <div class="form__item">
 	<div class="field">
 		<span class="field__label">{{label}}</span>
 
 		<div class="field__container">
-			<button onclick="fieldSelect.toggle(this);" class="field__select" type="button">
+			<button onclick="fieldSelect.toggle(this);" class="field__select" type="button" name="{{name}}">
 				<span class="field__icon"></span>
 				<span class="field__value field__value--placeholder">{{placeholder}}</span>
 			</button>

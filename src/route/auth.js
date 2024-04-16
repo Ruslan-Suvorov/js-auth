@@ -44,7 +44,7 @@ router.get('/signup', function (req, res) {
     // вказуємо назву контейнера
     name: 'signup',
     // вказуємо назву компонентів
-    component: ['back-button', 'field'],
+    component: ['back-button', 'field', 'button'],
 
     // вказуємо назву сторінки
     title: 'signup',
@@ -68,5 +68,26 @@ router.get('/signup', function (req, res) {
   // ↑↑ сюди вводимо JSON дані
 })
 
+router.post('/signup', function (req, res) {
+  const { email, password, role } = req.body
+
+  if (!email || !password || !role) {
+    return res.status(400).json({
+      message: 'Помилка! Не всі поля заповнені.',
+    })
+  }
+
+  try {
+    User.create({ email, password, role })
+
+    return res.status(200).json({
+      message: 'Користувач успішно зареєстрований!',
+    })
+  } catch (err) {
+    return res.status(400).json({
+      message: 'Сталася помилка!',
+    })
+  }
+})
 // Підключаємо роутер до бек-енду
 module.exports = router

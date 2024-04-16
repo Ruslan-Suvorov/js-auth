@@ -29,7 +29,7 @@
             {{>field
             action="signupForm.change"
             label="Повторіть пароль"
-            name="password2"
+            name="passwordAgain"
             placeholder="Ваш пароль"
             isPassword=true
             }}
@@ -38,7 +38,7 @@
             action="signupForm.change"
             label="Роль на сайті"
             placeholder="Оберіть роль"
-            name="isConfirm"
+            name="role"
             list=data.role
             isSelect=true
             }}
@@ -53,7 +53,7 @@
         </div>
         </div>
         {{>button text="Зареєструватись" submit="signupForm.submit()"}}
-        <span class="alert alert--error">ERROR</span>
+        <span class="alert alert--disabled">ERROR</span>
     </form>
 </main>
 
