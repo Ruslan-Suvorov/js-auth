@@ -11,6 +11,8 @@ class User {
 
   static #list = []
 
+  static getList = () => this.#list
+
   static USER_ROLE = {
     USER: 1,
     ADMIN: 2,
@@ -47,6 +49,12 @@ class User {
         (user) =>
           user.email === String(email).toLowerCase(),
       ) || null
+    )
+  }
+  static getById = (id) => {
+    return (
+      this.#list.find((user) => user.id === Number(id)) ||
+      null
     )
   }
 }

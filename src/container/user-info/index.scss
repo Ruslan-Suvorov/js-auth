@@ -1,0 +1,22 @@
+@use '../../style' as s;
+
+@use '../../style/form.scss' as form;
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: s.space(2);
+  padding: s.space(2);
+
+  &__title {
+    font-size: 16px;
+    height: 16px;
+    color: s.color(dark);
+  }
+
+  &__sub {
+    font-size: 14px;
+    height: 14px;
+    color: s.color(gray);
+  }
+}

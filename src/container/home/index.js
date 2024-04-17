@@ -1,1 +1,1 @@
-import '../../script/test'
+import '../../script/list'

@@ -80,3 +80,18 @@
     color: s.color(light);
   }
 }
+
+.sceleton {
+  border-radius: 10px;
+  animation: sceleton-animation 1s infinite alternate;
+}
+
+@keyframes sceleton-animation {
+  from {
+    background-color: s.color(gray);
+  }
+  to {
+    background-color: s.color(light);
+  }
+  
+}

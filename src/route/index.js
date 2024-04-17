@@ -45,7 +45,10 @@ router.get('/home', function (req, res) {
 
     // вказуємо дані,
     data: {
-      links: [{ href: '/signout', text: 'Sign Out' }],
+      links: [
+        { href: '/signout', text: 'Sign Out' },
+        { href: '/user-list', text: 'User list' },
+      ],
     },
   })
   // ↑↑ сюди вводимо JSON дані
@@ -54,10 +57,12 @@ router.get('/home', function (req, res) {
 // Підключіть файли роутів
 const auth = require('./auth')
 // Підключіть інші файли роутів, якщо є
+const user = require('./user')
 
 // Об'єднайте файли роутів за потреби
 router.use('/', auth)
 // Використовуйте інші файли роутів, якщо є
+router.use('/', user)
 
 // Експортуємо глобальний роутер
 module.exports = router
