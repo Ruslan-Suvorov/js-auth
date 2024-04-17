@@ -1,26 +1,22 @@
-import { Form, REGEXP_PASSWORD } from '../../script/form'
-import { saveSession } from '../../script/session'
+import { Form } from '../../script/form'
+import {
+  saveSession,
+  getSessionToken,
+  getSession,
+} from '../../script/session'
 
-class RecoveryConfirmForm extends Form {
+class SignupConfirmForm extends Form {
   FIELD_NAME = {
     CODE: 'code',
-    PASSWORD: 'password',
   }
   FIELD_ERROR = {
     CODE: 'Ви ввели невірний код підтвердження!',
-    PASSWORD:
-      'Мінімум 8 символів, включаючи мінімум 1 цифру! Лише латиниця!',
   }
 
   validate = (name, value) => {
     if (name === this.FIELD_NAME.CODE) {
       if (String(value).length !== 6) {
         return this.FIELD_ERROR.CODE
-      }
-    }
-    if (name === this.FIELD_NAME.PASSWORD) {
-      if (!REGEXP_PASSWORD.test(String(value))) {
-        return this.FIELD_ERROR.PASSWORD
       }
     }
   }
@@ -33,7 +29,7 @@ class RecoveryConfirmForm extends Form {
       this.setAlert('progress', 'Завантаження...')
 
       try {
-        const res = await fetch('/recovery-confirm', {
+        const res = await fetch('/signup-confirm', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -61,10 +57,31 @@ class RecoveryConfirmForm extends Form {
       [this.FIELD_NAME.CODE]: Number(
         this.value[this.FIELD_NAME.CODE],
       ),
-      [this.FIELD_NAME.PASSWORD]:
-        this.value[this.FIELD_NAME.PASSWORD],
+      token: getSessionToken(),
     })
   }
 }
 
-window.recoveryConfirmForm = new RecoveryConfirmForm()
+window.signupConfirmForm = new SignupConfirmForm()
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.session) {
+    if (window.session.user.isConfirm) {
+      location.assign('/')
+    }
+  } else {
+    location.assign('/')
+  }
+
+  document
+    .querySelector('#renew')
+    .addEventListener('click', (e) => {
+      e.preventDefault()
+
+      const session = getSession()
+
+      location.assign(
+        `/signup-confirm?renew=true&email=${session.user.email}`,
+      )
+    })
+})

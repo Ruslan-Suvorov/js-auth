@@ -1,8 +1,4 @@
-import {
-  Form,
-  REGEXP_EMAIL,
-  REGEXP_PASSWORD,
-} from '../../script/form'
+import { Form, REGEXP_EMAIL } from '../../script/form'
 
 class RecoveryForm extends Form {
   FIELD_NAME = {
@@ -24,31 +20,6 @@ class RecoveryForm extends Form {
     if (name === this.FIELD_NAME.EMAIL) {
       if (!REGEXP_EMAIL.test(String(value))) {
         return this.FIELD_ERROR.EMAIL
-      }
-    }
-    if (name === this.FIELD_NAME.PASSWORD) {
-      if (!REGEXP_PASSWORD.test(String(value))) {
-        return this.FIELD_ERROR.PASSWORD
-      }
-    }
-    if (name === this.FIELD_NAME.PADDWORD_AGAIN) {
-      if (
-        String(value) !==
-        this.value[this.FIELD_NAME.PASSWORD]
-      ) {
-        return this.FIELD_ERROR.PADDWORD_AGAIN
-      }
-    }
-
-    if (name === this.FIELD_NAME.ROLE) {
-      if (isNaN(value)) {
-        return this.FIELD_ERROR.ROLE
-      }
-    }
-
-    if (name === this.FIELD_NAME.IS_CONFIRM) {
-      if (!Boolean(value)) {
-        return this.FIELD_ERROR.NOT_CONFIRM
       }
     }
   }

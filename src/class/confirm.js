@@ -18,6 +18,7 @@ class Confirm {
 
     console.log(this.#list)
   }
+
   static delete = (code) => {
     this.#list = this.#list.filter(
       (item) => item.code !== code,

@@ -71,3 +71,12 @@
     display: none;
   }
 }
+
+.link {
+  color: s.color(main);
+  @include s.click;
+
+  &__prefix {
+    color: s.color(light);
+  }
+}
